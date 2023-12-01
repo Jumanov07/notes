@@ -1,7 +1,12 @@
-import React from "react";
 import { MdDeleteForever } from "react-icons/md";
+import { INote } from "../interfaces";
+import { MouseEvent } from "react";
 
-const Note = ({ id, text, date, handleDeleteNote }) => {
+interface Props extends INote {
+  onDeleteNote: (e: MouseEvent<SVGElement>) => void;
+}
+
+const Note = ({ id, text, date, onDeleteNote }: Props) => {
   return (
     <div className="note">
       <span className="text">{text}</span>
@@ -10,7 +15,8 @@ const Note = ({ id, text, date, handleDeleteNote }) => {
         <MdDeleteForever
           className="delete-icon"
           size="1.3em"
-          onClick={() => handleDeleteNote(id)}
+          onClick={onDeleteNote}
+          id={id}
         />
       </div>
     </div>

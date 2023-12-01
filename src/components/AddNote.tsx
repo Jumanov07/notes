@@ -1,21 +1,26 @@
-import React from "react";
+import { ChangeEvent } from "react";
 import { useState } from "react";
 
-const AddNote = ({ handleAddNote }) => {
-  const [noteText, setNoteText] = useState("");
+interface Props {
+  onAddNote: (text: string) => void;
+}
 
-  const characterLimit = 200;
+const AddNote = ({ onAddNote }: Props) => {
+  const [noteText, setNoteText] = useState<string>("");
 
-  const handleChange = (e) => {
-    const inputValue = e.target.value;
+  const characterLimit: number = 200;
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+    const inputValue: string = e.target.value;
+
     if (characterLimit - inputValue.length >= 0) {
       setNoteText(inputValue);
     }
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = (): void => {
     if (noteText.trim().length > 0) {
-      handleAddNote(noteText);
+      onAddNote(noteText);
       setNoteText("");
     }
   };
@@ -23,8 +28,8 @@ const AddNote = ({ handleAddNote }) => {
   return (
     <div className="note new">
       <textarea
-        rows="8"
-        cols="10"
+        rows={8}
+        cols={10}
         placeholder="Type to add a note"
         value={noteText}
         onChange={handleChange}
