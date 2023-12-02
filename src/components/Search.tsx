@@ -13,6 +13,7 @@ const Search = ({ setSearchText }: Props) => {
   return (
     <div className="search">
       <MdSearch className="search-icons" size="1.3em" />
+
       <input
         onChange={handleSearchNote}
         type="text"
